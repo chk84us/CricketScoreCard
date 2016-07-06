@@ -2,25 +2,20 @@ package game;
 
 import exceptions.OversExceededException;
 
+import javax.persistence.Entity;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Harish Chakravarthy
  */
+@Entity
 public class Innings {
-
-    public Over getCurrentOver() {
-        return currentOver;
-    }
-
-    public void setCurrentOver(Over currentOver) {
-        this.currentOver = currentOver;
-    }
 
     private final int maxOvers;
 
     private int oversBowled;
+
     private Over currentOver;
     private int ballsBowled;
     private int runsScored;
@@ -32,7 +27,6 @@ public class Innings {
     private Player striker;
     private Player nonStriker;
     private Player bowler;
-
     public Innings(int maxOvers, Team battingTeam, Team fieldingTeam) {
         this.maxOvers = maxOvers;
         this.battingTeam = battingTeam;
@@ -111,5 +105,13 @@ public class Innings {
 
     private boolean isOverUp() {
         return false;
+    }
+
+    public Over getCurrentOver() {
+        return currentOver;
+    }
+
+    public void setCurrentOver(Over currentOver) {
+        this.currentOver = currentOver;
     }
 }
