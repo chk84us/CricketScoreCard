@@ -1,6 +1,6 @@
 About
 ===
-This is a Spring Boot based REST service keeping track of and updating scores in a (casual) cricket game
+This is a Spring Boot based REST service for keeping track of and updating scores in a (casual) cricket game
 
 Required Software
 ===
