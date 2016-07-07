@@ -1,20 +1,39 @@
-package game;
+package cricket.game;
 
-import exceptions.PlayersExceededException;
+import cricket.exceptions.PlayersExceededException;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Harish Chakravarthy
  */
+@Entity
 public class Team {
 
     private static final int MAX_PLAYERS = 11;
 
-    private final String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String name;
+
+    @ElementCollection
     private List<Player> players;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Player captain;
+
+    protected Team() {
+
+    }
 
     public Team(String name) {
         this.name = name;

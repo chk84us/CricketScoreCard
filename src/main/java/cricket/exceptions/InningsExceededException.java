@@ -1,4 +1,4 @@
-package exceptions;
+package cricket.exceptions;
 
 /**
  * @author Harish Chakravarthy

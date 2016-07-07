@@ -1,8 +1,16 @@
-package game;
+package cricket.game;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * @author Harish Chakravarthy
  */
+@Entity
 public class Wicket {
 
     private enum WicketType {
@@ -13,10 +21,24 @@ public class Wicket {
         runout;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Player batter;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Player bowler;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Player fielder;
+
     private WicketType wicketType;
+
+    protected Wicket() {
+
+    }
 
     public Wicket(Player batter, WicketType type) {
         this.wicketType = type;

@@ -1,8 +1,14 @@
-package game;
+package cricket.game;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Harish Chakravarthy
  */
+@Entity
 public class Delivery {
 
     private enum DeliveryType {
@@ -17,10 +23,16 @@ public class Delivery {
         runs;
     }
 
-    private final long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private DeliveryType deliveryType;
     private int runs;
     private Event event;
+
+    protected Delivery() {
+
+    }
 
     public Delivery(long id, DeliveryType deliveryType) {
         this.id = id;

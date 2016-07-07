@@ -1,8 +1,15 @@
-package game;
+package cricket.game;
 
-import exceptions.OversExceededException;
+import cricket.exceptions.OversExceededException;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 import java.util.Map;
 
@@ -12,21 +19,46 @@ import java.util.Map;
 @Entity
 public class Innings {
 
-    private final int maxOvers;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
+    private int maxOvers;
     private int oversBowled;
-
-    private Over currentOver;
     private int ballsBowled;
     private int runsScored;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Over currentOver;
+
+    @OneToMany
     private List<Over> overs;
+
+    @OneToMany
     private List<Delivery> deliveries;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Team battingTeam;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Team fieldingTeam;
+
+    @ElementCollection
     private Map<Player, Integer> playerRunsMap;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Player striker;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Player nonStriker;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Player bowler;
+
+    protected Innings() {
+
+    }
+
     public Innings(int maxOvers, Team battingTeam, Team fieldingTeam) {
         this.maxOvers = maxOvers;
         this.battingTeam = battingTeam;
@@ -113,5 +145,10 @@ public class Innings {
 
     public void setCurrentOver(Over currentOver) {
         this.currentOver = currentOver;
+    }
+
+    @Override
+    public String toString() {
+        return "InningsString";
     }
 }

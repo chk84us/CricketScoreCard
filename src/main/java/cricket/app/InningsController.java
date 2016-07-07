@@ -1,7 +1,7 @@
-package app;
+package cricket.app;
 
-import game.Innings;
-import game.Team;
+import cricket.game.Innings;
+import cricket.game.Team;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
