@@ -1,6 +1,6 @@
-package cricket.app;
+package cricket.web;
 
-import cricket.game.CricketGame;
+import cricket.domain.CricketGame;
 import org.springframework.data.repository.CrudRepository;
 
 /**

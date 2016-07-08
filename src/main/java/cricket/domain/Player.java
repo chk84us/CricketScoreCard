@@ -1,4 +1,4 @@
-package cricket.game;
+package cricket.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,11 +18,6 @@ public class Player {
 
     protected Player() {
 
-    }
-
-    public Player(long id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public String getName() {

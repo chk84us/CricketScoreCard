@@ -1,4 +1,4 @@
-package cricket.game;
+package cricket.domain;
 
 import cricket.exceptions.PlayersExceededException;
 
@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,11 +32,6 @@ public class Team {
 
     protected Team() {
 
-    }
-
-    public Team(String name) {
-        this.name = name;
-        players = new ArrayList<Player>(MAX_PLAYERS);
     }
 
     public String getName() {

@@ -1,7 +1,7 @@
-package cricket.app;
+package cricket.web;
 
 import cricket.exceptions.InningsExceededException;
-import cricket.game.CricketGame;
+import cricket.domain.CricketGame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

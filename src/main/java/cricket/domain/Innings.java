@@ -1,4 +1,4 @@
-package cricket.game;
+package cricket.domain;
 
 import cricket.exceptions.OversExceededException;
 
@@ -57,12 +57,6 @@ public class Innings {
 
     protected Innings() {
 
-    }
-
-    public Innings(int maxOvers, Team battingTeam, Team fieldingTeam) {
-        this.maxOvers = maxOvers;
-        this.battingTeam = battingTeam;
-        this.fieldingTeam = fieldingTeam;
     }
 
     public int getMaxOvers() {

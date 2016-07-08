@@ -1,4 +1,4 @@
-package cricket.game;
+package cricket.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * @author Harish Chakravarthy
@@ -28,14 +26,6 @@ public class CricketGame {
 
     protected CricketGame() {
 
-    }
-
-    public CricketGame(String venue) {
-        this.venue = venue;
-    }
-
-    public CricketGame(long id) {
-        this.id = id;
     }
 
     public long getId() {

@@ -1,4 +1,4 @@
-package cricket.game;
+package cricket.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -29,13 +29,6 @@ public class Over {
 
     protected Over() {
 
-    }
-
-    public Over(long id, Player bowler, int overNumber, List<Delivery> deliveries) {
-        this.id = id;
-        this.bowler = bowler;
-        this.overNumber = overNumber;
-        this.deliveries = deliveries;
     }
 
     public long getId() {

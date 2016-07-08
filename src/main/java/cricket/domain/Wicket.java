@@ -1,4 +1,4 @@
-package cricket.game;
+package cricket.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -38,19 +38,6 @@ public class Wicket {
 
     protected Wicket() {
 
-    }
-
-    public Wicket(Player batter, WicketType type) {
-        this.wicketType = type;
-        this.batter = batter;
-
-        if (type == WicketType.runout) {
-            setFielder(fielder);
-        } else if (type == WicketType.bowled) {
-            setBowler(bowler);
-        } else if (type == WicketType.caught) {
-            setFielder(fielder);
-        }
     }
 
     public Player getBatter() {

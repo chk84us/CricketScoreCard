@@ -1,4 +1,4 @@
-package cricket.game;
+package cricket.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,11 +32,6 @@ public class Delivery {
 
     protected Delivery() {
 
-    }
-
-    public Delivery(long id, DeliveryType deliveryType) {
-        this.id = id;
-        this.deliveryType = deliveryType;
     }
 
     public long getId() {
