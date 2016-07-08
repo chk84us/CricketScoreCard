@@ -1,11 +1,11 @@
 package cricket.web;
 
-import cricket.domain.CricketGame;
+import cricket.domain.Cricket;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * @author Harish Chakravarthy
  */
-public interface CricketRepository extends CrudRepository<CricketGame, Long> {
-    CricketGame findById(long id);
+public interface CricketRepository extends CrudRepository<Cricket, Long> {
+    Cricket findById(long id);
 }

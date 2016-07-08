@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
  * @author Harish Chakravarthy
  */
 @Entity
-public class CricketGame {
+public class Cricket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +24,7 @@ public class CricketGame {
     @OneToOne(cascade = CascadeType.ALL)
     private Innings secondInnings;
 
-    protected CricketGame() {
+    protected Cricket() {
 
     }
 
@@ -57,4 +57,7 @@ public class CricketGame {
         return "CricketGameString";
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 }
