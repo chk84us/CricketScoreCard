@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,8 +23,6 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestController
 public class CricketController {
 
-    private static final String CRICKET_RESOURCE_PATH = "/cricket";
-    private static final String INNINGS_RESOURCE_PATH = "/cricket/innings";
     private static final Logger log = LoggerFactory.getLogger(CricketController.class);
 
     private final AtomicLong counter = new AtomicLong();
@@ -31,8 +30,8 @@ public class CricketController {
     @Autowired
     private CricketRepository repository;
 
-    @RequestMapping(value = CRICKET_RESOURCE_PATH, method = RequestMethod.GET)
-    public ResponseEntity<Cricket> getCricketGame(@RequestParam(name = "id") long id) {
+    @RequestMapping(value = "/cricket/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Cricket> getCricketGame(@PathVariable(value = "id") long id) {
         Cricket cricket = null;
         try {
             cricket = repository.findById(id);
@@ -42,7 +41,7 @@ public class CricketController {
         return new ResponseEntity<Cricket>(cricket, HttpStatus.OK);
     }
 
-    @RequestMapping(value = CRICKET_RESOURCE_PATH, method = RequestMethod.POST)
+    @RequestMapping(value = "/cricket", method = RequestMethod.POST)
     public Cricket addCricketGame(@RequestBody(required = true) Cricket cricket) {
         try {
             repository.save(cricket);

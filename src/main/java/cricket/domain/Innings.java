@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +21,7 @@ public class Innings {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int inningsNumber;
+    private long id;
     private int maxOvers;
     private int oversBowled;
     private int ballsBowled;
@@ -147,11 +145,11 @@ public class Innings {
         return "InningsString";
     }
 
-    public int getInningsNumber() {
-        return inningsNumber;
+    public long getId() {
+        return id;
     }
 
-    public void setInningsNumber(int inningsNumber) {
-        this.inningsNumber = inningsNumber;
+    public void setId(long id) {
+        this.id = id;
     }
 }
