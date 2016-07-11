@@ -1,6 +1,7 @@
 package cricket.web;
 
 import cricket.domain.Cricket;
+import cricket.web.persistence.CricketRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Harish Chakravarthy
  */
 @RestController
+@RequestMapping(value = "/cricket")
 public class CricketController {
 
     private static final Logger log = LoggerFactory.getLogger(CricketController.class);
@@ -27,7 +29,7 @@ public class CricketController {
     @Autowired
     private CricketRepository repository;
 
-    @RequestMapping(value = "/cricket/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ResponseEntity<Cricket> getCricketGame(@PathVariable(value = "id") long id) {
         Cricket cricket = null;
 
@@ -40,7 +42,7 @@ public class CricketController {
         return new ResponseEntity<Cricket>(cricket, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/cricket", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public Cricket addCricketGame(@RequestBody(required = true) Cricket cricket) {
         try {
             repository.save(cricket);

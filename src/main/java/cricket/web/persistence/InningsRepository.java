@@ -1,4 +1,4 @@
-package cricket.web;
+package cricket.web.persistence;
 
 /**
  * @author Harish Chakravarthy

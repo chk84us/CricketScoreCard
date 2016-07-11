@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +24,8 @@ import java.util.List;
  * @author Harish Chakravarthy
  */
 @RestController
-@RequestMapping(value = "/cricket/{id}/innings/{inningsNumber}/overs")
-public class OverController {
+@RequestMapping(value = "/cricket/{id}/innings/{inningsNumber}/overs/{overNumber}/deliveries")
+public class DeliveryController {
 
     @Autowired
     private CricketRepository cricketRepository;
@@ -41,44 +40,48 @@ public class OverController {
     private DeliveryRepository deliveryRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Over>> getOvers(@PathVariable(value = "id") long id,
-            @PathVariable(value = "inningsNumber") int inningsNumber) throws InningsExceededException {
-        return new ResponseEntity<List<Over>>(cricketRepository.findById(id).getInningsByNumber(inningsNumber)
-                .getOvers(), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "{overNumber}", method = RequestMethod.GET)
-    public ResponseEntity<Over> getOver(@PathVariable(value = "id") long id,
+    public ResponseEntity<List<Delivery>> getDeliveries(@PathVariable(value = "id") long id,
             @PathVariable(value = "inningsNumber") int inningsNumber, @PathVariable(value = "overNumber") int overNumber)
             throws InningsExceededException {
+
+        List<Delivery> deliveries = cricketRepository.findById(id).getInningsByNumber(inningsNumber)
+                .getOverByNumber(overNumber).getDeliveries();
+
+        return new ResponseEntity<>(deliveries, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "{deliveryNumber}", method = RequestMethod.GET)
+    public ResponseEntity<Delivery> getDelivery(@PathVariable(value = "id") long id,
+            @PathVariable(value = "inningsNumber") int inningsNumber,
+            @PathVariable(value = "overNumber") int overNumber,
+            @PathVariable(value = "deliveryNumber") int deliveryNumber) throws InningsExceededException {
+
+        Delivery delivery = cricketRepository.findById(id).getInningsByNumber(inningsNumber)
+                .getOverByNumber(overNumber).getDelivery(deliveryNumber);
+
+        return new ResponseEntity<>(delivery, HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<Delivery> addDelivery(long id, int inningsNumber, int overNumber, Delivery delivery)
+            throws InningsExceededException, OversExceededException {
+
+        deliveryRepository.save(delivery);
 
         Cricket cricketGame = cricketRepository.findById(id);
         Innings innings = cricketGame.getInningsByNumber(inningsNumber);
         Over over = innings.getOverByNumber(overNumber);
 
-        return new ResponseEntity<>(over, HttpStatus.OK);
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Over> addOver(@PathVariable(value = "id") long id,
-            @PathVariable(value = "inningsNumber") int inningsNumber, @RequestBody(required = true) Over over)
-            throws InningsExceededException, OversExceededException {
-
-        saveDeliveries(over);
+        over.addDelivery(delivery);
         overRepository.save(over);
-        Cricket cricketGame = cricketRepository.findById(id);
-        Innings innings = cricketGame.getInningsByNumber(inningsNumber);
+
         innings.addOver(over);
         inningsRepository.save(innings);
+
+        cricketGame.setInningsByNumber(inningsNumber, innings);
         cricketRepository.save(cricketGame);
 
-        return new ResponseEntity<>(over, HttpStatus.OK);
+        return new ResponseEntity<>(delivery, HttpStatus.OK);
     }
-
-    private void saveDeliveries(@RequestBody(required = true) Over over) {
-        for (Delivery delivery : over.getDeliveries()) {
-            deliveryRepository.save(delivery);
-        }
-    }
-
 }

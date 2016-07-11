@@ -1,4 +1,4 @@
-package cricket.web;
+package cricket.web.persistence;
 
 import cricket.domain.Cricket;
 import org.springframework.data.repository.CrudRepository;

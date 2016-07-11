@@ -62,4 +62,8 @@ public class Over {
     public void setBowler(Player bowler) {
         this.bowler = bowler;
     }
+
+    public Delivery getDelivery(int deliveryNumber) {
+        return deliveries.get(deliveryNumber);
+    }
 }
