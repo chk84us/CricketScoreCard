@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -33,15 +32,9 @@ public class InningsController {
     public ResponseEntity<Innings> getInnings(@PathVariable(value = "id") long id,
             @PathVariable(value = "inningsNumber") int inningsNumber) throws InningsExceededException {
         Innings innings = null;
-        try {
-            if (inningsNumber == 1) {
-                innings = cricketRepository.findById(id).getFirstInnings();
-            } else if (inningsNumber == 2) {
-                innings = cricketRepository.findById(id).getSecondInnings();
-            } else {
-                throw new InningsExceededException();
-            }
 
+        try {
+            innings = cricketRepository.findById(id).getInningsByNumber(inningsNumber);
         } catch (Exception e) {
             log.error("Error when getting innings " + e);
         }
@@ -51,20 +44,14 @@ public class InningsController {
 
     @RequestMapping(value = "cricket/{id}/innings/{inningsNumber}", method = RequestMethod.POST)
     public ResponseEntity<Innings> addInnings(@PathVariable(value = "id") long id,
-            @PathVariable(value = "inningsNumber") long inningsNumber, @RequestBody(required = true) Innings innings)
+            @PathVariable(value = "inningsNumber") int inningsNumber, @RequestBody(required = true) Innings innings)
             throws InningsExceededException {
         Cricket cricketGame = null;
 
         try {
             cricketGame = cricketRepository.findById(id);
             inningsRepository.save(innings);
-            if (inningsNumber == 1) {
-                cricketGame.setFirstInnings(innings);
-            } else if (inningsNumber == 2) {
-                cricketGame.setFirstInnings(innings);
-            } else {
-                throw new InningsExceededException();
-            }
+            cricketGame.setInningsByNumber(inningsNumber, innings);
         } catch (Exception e) {
             log.error("Error when saving innings " + e);
         }

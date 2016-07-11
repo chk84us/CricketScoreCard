@@ -11,16 +11,20 @@ import javax.persistence.Id;
 @Entity
 public class Delivery {
 
-    private enum DeliveryType {
-        valid,
-        noBall,
-        wideBall;
+    public void setDeliveryType(DeliveryType deliveryType) {
+        this.deliveryType = deliveryType;
     }
 
-    private enum Event {
-        dotBall,
-        wicket,
-        runs;
+    public enum DeliveryType {
+        VALID,
+        NO_BALL,
+        WIDE_BALL;
+    }
+
+    public enum Event {
+        DOT_BALL,
+        WICKET,
+        RUNS;
     }
 
     @Id
@@ -30,7 +34,7 @@ public class Delivery {
     private int runs;
     private Event event;
 
-    protected Delivery() {
+    public Delivery() {
 
     }
 

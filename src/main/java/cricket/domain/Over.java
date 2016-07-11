@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class Over {
     @OneToMany
     private List<Delivery> deliveries;
 
-    protected Over() {
+    public Over() {
 
     }
 
@@ -52,6 +53,13 @@ public class Over {
     }
 
     public void addDelivery(Delivery delivery) {
+        if(deliveries == null) {
+            deliveries = new ArrayList<Delivery>(MAX_DELIVERIES);
+        }
         deliveries.add(delivery);
+    }
+
+    public void setBowler(Player bowler) {
+        this.bowler = bowler;
     }
 }

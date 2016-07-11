@@ -152,4 +152,8 @@ public class Innings {
     public void setId(long id) {
         this.id = id;
     }
+
+    public Over getOverByNumber(int overNumber) {
+        return overs.get(overNumber);
+    }
 }

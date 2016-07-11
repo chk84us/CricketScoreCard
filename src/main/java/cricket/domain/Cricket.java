@@ -1,5 +1,7 @@
 package cricket.domain;
 
+import cricket.exceptions.InningsExceededException;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -53,12 +55,38 @@ public class Cricket {
         this.secondInnings = secondInnings;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Innings getInningsByNumber(int inningsNumber) throws InningsExceededException {
+        if (inningsNumber == 1) {
+            return firstInnings;
+        }
+        else if (inningsNumber == 2) {
+            return secondInnings;
+        }
+        else {
+            throw new InningsExceededException();
+        }
+    }
+
+    public void setInningsByNumber(int inningsNumber, Innings innings) throws InningsExceededException {
+        if (inningsNumber == 1) {
+            setFirstInnings(innings);
+        }
+        else if (inningsNumber == 2) {
+            setSecondInnings(innings);
+        }
+        else {
+            throw new InningsExceededException();
+        }
+    }
+
     @Override
     public String toString() {
         return "CricketGameString";
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+
 }

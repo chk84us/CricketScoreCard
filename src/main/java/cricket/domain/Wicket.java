@@ -14,11 +14,11 @@ import javax.persistence.OneToOne;
 public class Wicket {
 
     private enum WicketType {
-        bowled,
-        caught,
-        hitout,
-        lbw,
-        runout;
+        BOWLED,
+        CAUGHT,
+        HIT_OUT,
+        LBW,
+        RUN_OUT;
     }
 
     @Id
