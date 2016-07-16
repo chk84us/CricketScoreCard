@@ -27,9 +27,6 @@ public class Innings {
     private int ballsBowled;
     private int runsScored;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Over currentOver;
-
     @OneToMany
     private List<Over> overs;
 
@@ -130,14 +127,6 @@ public class Innings {
 
     private boolean isOverUp() {
         return false;
-    }
-
-    public Over getCurrentOver() {
-        return currentOver;
-    }
-
-    public void setCurrentOver(Over currentOver) {
-        this.currentOver = currentOver;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package cricket.web;
 
 import cricket.domain.Cricket;
+import cricket.exceptions.NoIdException;
+import cricket.exceptions.ResourceIdMismatchException;
 import cricket.web.persistence.CricketRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,5 +53,20 @@ public class CricketController {
         }
 
         return repository.findById(cricket.getId());
+    }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Cricket> updateCricketGame(@PathVariable(value = "id") long id,
+            @RequestBody(required = true) Cricket cricket) throws NoIdException, ResourceIdMismatchException {
+        if (cricket.getId() == 0) {
+            throw new NoIdException();
+        }
+        else if (id != cricket.getId()) {
+            throw new ResourceIdMismatchException();
+        }
+
+        repository.save(cricket);
+
+        return new ResponseEntity<>(repository.findById(cricket.getId()), HttpStatus.OK);
     }
 }

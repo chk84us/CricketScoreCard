@@ -16,12 +16,13 @@ public class Player {
     private long id;
     private String name;
     private BowlingType bowlingType;
-
+    private BattingHand battingHand;
 
     public enum BattingHand {
         Right,
-        Left
+        Left;
     }
+
 
     public enum BowlingType {
         RIGHT_ARM_MEDIUM,
@@ -31,20 +32,19 @@ public class Player {
         LEFT_ARM_MEDIUM,
         LEFT_ARM_FAST,
         LEFT_ARM_ORTHODOX,
-        LEFT_ARM_CHINAMAN
+        LEFT_ARM_CHINAMAN;
     }
     public Player() {
 
     }
-
     public String getName() {
         return name;
     }
 
-
     public long getId() {
         return id;
     }
+
 
     public void setName(String name) {
         this.name = name;
@@ -56,5 +56,13 @@ public class Player {
 
     public void setBowlingType(BowlingType bowlingType) {
         this.bowlingType = bowlingType;
+    }
+
+    public BattingHand getBattingHand() {
+        return battingHand;
+    }
+
+    public void setBattingHand(BattingHand battingHand) {
+        this.battingHand = battingHand;
     }
 }

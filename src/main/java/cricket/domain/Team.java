@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class Team {
     @OneToOne(cascade = CascadeType.ALL)
     private Player captain;
 
-    protected Team() {
+    public Team() {
 
     }
 
@@ -59,6 +60,10 @@ public class Team {
     }
 
     private boolean canAddPlayer() {
+        if (players == null) {
+            players = new ArrayList<>(MAX_PLAYERS);
+            return true;
+        }
         return !(players.size() >= MAX_PLAYERS);
     }
 

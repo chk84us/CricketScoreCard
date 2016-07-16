@@ -21,6 +21,12 @@ public class Cricket {
     private long id;
     private String venue;
 
+    @OneToOne
+    private Team homeTeam;
+
+    @OneToOne
+    private Team awayTeam;
+
     @OneToOne(cascade = CascadeType.ALL)
     private Innings firstInnings;
 
@@ -89,4 +95,19 @@ public class Cricket {
     }
 
 
+    public Team getHomeTeam() {
+        return homeTeam;
+    }
+
+    public void setHomeTeam(Team homeTeam) {
+        this.homeTeam = homeTeam;
+    }
+
+    public Team getAwayTeam() {
+        return awayTeam;
+    }
+
+    public void setAwayTeam(Team awayTeam) {
+        this.awayTeam = awayTeam;
+    }
 }

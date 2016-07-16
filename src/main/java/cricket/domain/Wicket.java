@@ -36,7 +36,7 @@ public class Wicket {
 
     private WicketType wicketType;
 
-    protected Wicket() {
+    public Wicket() {
 
     }
 
