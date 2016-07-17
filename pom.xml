@@ -58,6 +58,13 @@
                 <version>2.3.2</version>
                 <configuration>
                     <finalName>cricket-scoring-service</finalName>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>.</classpathPrefix>
+                            <mainClass>cricket.Application</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
