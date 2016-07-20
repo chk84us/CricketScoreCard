@@ -50,12 +50,6 @@ public class PlayerController {
         return new ResponseEntity<>(playerList, HttpStatus.OK);
     }
 
-//    @RequestMapping(method = RequestMethod.POST)
-//    public ResponseEntity<Player> addPlayer(@RequestBody Player player) {
-//        playerRepository.save(player);
-//        return new ResponseEntity<Player>(playerRepository.findById(player.getId()), HttpStatus.OK);
-//    }
-
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<List<Player>> addPlayers(@RequestBody List<Player> players) {
         playerRepository.save(players);
