@@ -32,7 +32,7 @@ public class CricketController {
     private CricketRepository repository;
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ResponseEntity<Cricket> getCricketGame(@PathVariable(value = "id") long id) {
+    public ResponseEntity<Cricket> getCricketGame(@PathVariable long id) {
         Cricket cricket = null;
 
         try {
@@ -45,7 +45,7 @@ public class CricketController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Cricket addCricketGame(@RequestBody(required = true) Cricket cricket) {
+    public Cricket addCricketGame(@RequestBody Cricket cricket) {
         try {
             repository.save(cricket);
         } catch (Exception e) {
@@ -56,12 +56,11 @@ public class CricketController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Cricket> updateCricketGame(@PathVariable(value = "id") long id,
-            @RequestBody(required = true) Cricket cricket) throws NoIdException, ResourceIdMismatchException {
+    public ResponseEntity<Cricket> updateCricketGame(@PathVariable long id, @RequestBody Cricket cricket)
+            throws NoIdException, ResourceIdMismatchException {
         if (cricket.getId() == 0) {
             throw new NoIdException();
-        }
-        else if (id != cricket.getId()) {
+        } else if (id != cricket.getId()) {
             throw new ResourceIdMismatchException();
         }
 

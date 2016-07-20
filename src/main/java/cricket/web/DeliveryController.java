@@ -40,9 +40,8 @@ public class DeliveryController {
     private DeliveryRepository deliveryRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Delivery>> getDeliveries(@PathVariable(value = "id") long id,
-            @PathVariable(value = "inningsNumber") int inningsNumber, @PathVariable(value = "overNumber") int overNumber)
-            throws InningsExceededException {
+    public ResponseEntity<List<Delivery>> getDeliveries(@PathVariable long id, @PathVariable int inningsNumber,
+            @PathVariable int overNumber) throws InningsExceededException {
 
         List<Delivery> deliveries = cricketRepository.findById(id).getInningsByNumber(inningsNumber)
                 .getOverByNumber(overNumber).getDeliveries();
@@ -52,10 +51,8 @@ public class DeliveryController {
     }
 
     @RequestMapping(value = "{deliveryNumber}", method = RequestMethod.GET)
-    public ResponseEntity<Delivery> getDelivery(@PathVariable(value = "id") long id,
-            @PathVariable(value = "inningsNumber") int inningsNumber,
-            @PathVariable(value = "overNumber") int overNumber,
-            @PathVariable(value = "deliveryNumber") int deliveryNumber) throws InningsExceededException {
+    public ResponseEntity<Delivery> getDelivery(@PathVariable long id, @PathVariable int inningsNumber,
+            @PathVariable int overNumber, @PathVariable int deliveryNumber) throws InningsExceededException {
 
         Delivery delivery = cricketRepository.findById(id).getInningsByNumber(inningsNumber)
                 .getOverByNumber(overNumber).getDelivery(deliveryNumber);
@@ -64,6 +61,7 @@ public class DeliveryController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Delivery> addDelivery(long id, int inningsNumber, int overNumber, Delivery delivery)
             throws InningsExceededException, OversExceededException {
 

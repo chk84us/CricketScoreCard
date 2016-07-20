@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author Harish Chakravarthy
  */
 public interface TeamRepository extends CrudRepository<Team, Long> {
+    Team findById(long id);
 }

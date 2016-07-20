@@ -82,4 +82,16 @@ public class Team {
     public void setCaptain(Player captain) {
         this.captain = captain;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
